@@ -10,7 +10,7 @@ function Hello() {
     setUpdateMessage('checking for updates');
   });
 
-  return <div>Message: New version {updateMessage}</div>;
+  return <div>Version 2.0 {updateMessage}</div>;
 }
 
 export default function App() {
