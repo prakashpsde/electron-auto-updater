@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
-import icon from '../../assets/icon.svg';
 import './App.css';
 
 function Hello() {
@@ -11,7 +10,7 @@ function Hello() {
     setUpdateMessage('checking for updates');
   });
 
-  return <div>Message{updateMessage}</div>;
+  return <div>Message: {updateMessage}</div>;
 }
 
 export default function App() {
