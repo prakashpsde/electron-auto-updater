@@ -1,5 +1,5 @@
 {
-  "version": "2.0.0",
+  "version": "1.0.0",
   "description": "Auto updater check",
   "keywords": [
     "electron",
@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/prakashpsde/electron-auto-updater"
+    "url": "git+https://github.com/prakashpsde/electron-auto-updater.git"
   },
   "license": "MIT",
   "author": {
@@ -47,8 +47,7 @@
     "start:main": "cross-env NODE_ENV=development electronmon -r ts-node/register/transpile-only .",
     "start:preload": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack --config ./.erb/configs/webpack.config.preload.dev.ts",
     "start:renderer": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack serve --config ./.erb/configs/webpack.config.renderer.dev.ts",
-    "test": "jest",
-    "dist": "electron-builder"
+    "test": "jest"
   },
   "browserslist": [],
   "prettier": {
@@ -232,7 +231,6 @@
     ],
     "publish": {
       "provider": "github",
-      "releaseType": "release",
       "owner": "prakashpsde",
       "repo": "electron-auto-updater"
     }

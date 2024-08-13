@@ -15,8 +15,13 @@ import log from 'electron-log';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
 
-autoUpdater.autoDownload = false;
-autoUpdater.autoInstallOnAppQuit = false;
+class AppUpdater {
+  constructor() {
+    log.transports.file.level = 'info';
+    autoUpdater.logger = log;
+    autoUpdater.checkForUpdatesAndNotify();
+  }
+}
 
 let mainWindow: BrowserWindow | null = null;
 
@@ -101,6 +106,10 @@ const createWindow = async () => {
     shell.openExternal(edata.url);
     return { action: 'deny' };
   });
+
+  // Remove this if your app does not use auto updates
+  // eslint-disable-next-line
+  new AppUpdater();
 };
 
 /**
@@ -122,23 +131,18 @@ app
     app.on('activate', () => {
       if (mainWindow === null) createWindow();
     });
-    autoUpdater.checkForUpdates();
-    mainWindow?.webContents.send(
-      'checking-for-updates',
-      'Checking for updates',
-    );
   })
   .catch(console.log);
 
-autoUpdater.on('update-available', () => {
-  autoUpdater.downloadUpdate();
-  mainWindow?.webContents.send('checking-for-updates', 'Update available');
-});
+// autoUpdater.on('update-available', () => {
+//   autoUpdater.downloadUpdate();
+//   mainWindow?.webContents.send('checking-for-updates', 'Update available');
+// });
 
-autoUpdater.on('update-not-available', () => {
-  mainWindow?.webContents.send('checking-for-updates', 'Update not available');
-});
+// autoUpdater.on('update-not-available', () => {
+//   mainWindow?.webContents.send('checking-for-updates', 'Update not available');
+// });
 
-autoUpdater.on('update-downloaded', () => {
-  mainWindow?.webContents.send('checking-for-updates', 'Update downloaded');
-});
+// autoUpdater.on('update-downloaded', () => {
+//   mainWindow?.webContents.send('checking-for-updates', 'Update downloaded');
+// });
